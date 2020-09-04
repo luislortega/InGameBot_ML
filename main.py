@@ -38,7 +38,6 @@ rectangles, weights = cv.groupRectangles(rectangles, 1, 0.5)
 
 print(rectangles)
 
-
 if len(rectangles):
     print("Found")
     
@@ -65,7 +64,6 @@ if len(rectangles):
         '''
         Drawing a mark
         '''
-        
         center_x = x + int(w/2)
         center_y = y + int(h/2)
         cv.drawMarker(haystack_img, (center_x, center_y), color=(255,0,255), line_type=cv.MARKER_CROSS)
@@ -73,7 +71,5 @@ if len(rectangles):
     #show the result
     cv.imshow('Result', haystack_img)
     cv.waitKey()
-        
-    
 else:
     print("Not found")
