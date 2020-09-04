@@ -28,7 +28,7 @@ class Vision:
         self.method = method
 
     def find(self, haystack_img, threshold=0.5, max_results=10):
-        print("finding...")
+        #print("finding...")
         # run the OpenCV algorithm
         result = cv.matchTemplate(haystack_img, self.needle_img, self.method)
 
@@ -66,7 +66,7 @@ class Vision:
             print('Warning: too many results, raise the threshold.')
             rectangles = rectangles[:max_results]
             
-        print(rectangles)
+        #print(rectangles)
         
 
         return rectangles
