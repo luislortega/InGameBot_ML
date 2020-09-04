@@ -9,6 +9,9 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 haystack_img = cv.imread('albion_farm.jpg', cv.IMREAD_REDUCED_COLOR_2)
 needle_img = cv.imread('cabbage.jpg', cv.IMREAD_REDUCED_COLOR_2)
 
+needle_w = needle_img.shape[1]
+needle_h = needle_img.shape[0]
+
 result = cv.matchTemplate(haystack_img, needle_img, cv.TM_CCOEFF_NORMED)
 ##print(result)
 
@@ -24,16 +27,26 @@ locations = np.where(result >= threshold)
 locations = list(zip(*locations[::-1]))
 #print(locations)
 
+#first we need to create the list of [x,y,w,h] rectangles
+rectangles = []
 
-if locations:
+for loc in locations:
+    rect = [int(loc[0]), int(loc[1]), needle_w, needle_h]
+    rectangles.append(rect)
+
+rectangles, weights = cv.groupRectangles(rectangles, 1, 0.5)
+
+print(rectangles)
+
+
+if len(rectangles):
     print("Found")
     
     #get dimension of the needle image
-    needle_w = needle_img.shape[1]
-    needle_h = needle_img.shape[0]
-    
-    for loc in locations:
-        # 
+    for (x,y,w,h) in rectangles:
+        #
+        # Determine the box positions 
+        #
         #  (top_left)
         #       *-------------------*
         #       |                   |
@@ -43,8 +56,8 @@ if locations:
         #       |                   |
         #       *-------------------*
         #                           (bottom_right)
-        top_left = loc
-        bottom_right = (top_left[0] + needle_w, top_left[1] + needle_h)
+        top_left = (x,y)
+        bottom_right = (x + w, y +h)
 
         #draw the rectangle
         cv.rectangle(haystack_img, top_left, bottom_right, color=(0,255,0), thickness=2, lineType=cv.LINE_4)
