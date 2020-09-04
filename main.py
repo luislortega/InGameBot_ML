@@ -14,3 +14,11 @@ min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
 print('Best match top left position: %s' % str(max_loc))
 #confidence of the match
 print('Best match confidence: %s' % max_val)
+
+#Object found?
+threshold = 0.8
+
+if max_val > threshold
+    print('Found')
+else:
+    print('Not found')
