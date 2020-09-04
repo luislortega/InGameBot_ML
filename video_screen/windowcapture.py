@@ -1,7 +1,6 @@
 import numpy as np
 import win32gui, win32ui, win32con
 
-
 class WindowCapture:
 
     # properties
@@ -16,6 +15,8 @@ class WindowCapture:
     # constructor
     def __init__(self, window_name):
         # find the handle for the window we want to capture
+        #shell.AppActivate("Visual Studio Code")
+
         self.hwnd = win32gui.FindWindow(None, window_name)
         if not self.hwnd:
             raise Exception('Window not found: {}'.format(window_name))
