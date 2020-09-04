@@ -5,6 +5,7 @@ from time import time
 from windowcapture import WindowCapture
 from vision import Vision
 from hsvfilter import HsvFilter
+import time
 
 # Change the working directory to the folder this script is in.
 # Doing this because I'll be putting the files from each video in their own folder on GitHub
@@ -12,7 +13,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 
 # initialize the WindowCapture class
-wincap = WindowCapture('LDPlayer')
+wincap = WindowCapture('Administrador de tareas')
 # initialize the Vision class
 vision_limestone = Vision('cabbage.jpg')
 # initialize the trackbar window
@@ -21,7 +22,7 @@ vision_limestone.init_control_gui()
 # limestone HSV filter
 hsv_filter = HsvFilter(0, 180, 129, 15, 229, 243, 143, 0, 67, 0)
 
-loop_time = time()
+#loop_time = time()
 while(True):
 
     # get an updated image of the game
@@ -42,8 +43,8 @@ while(True):
 
     # debug the loop rate
     #print('FPS {}'.format(1 / (time() - loop_time)))
-    loop_time = time()
-
+    #loop_time = time()
+    #time.sleep(1)
     # press 'q' with the output window focused to exit.
     # waits 1 ms every loop to process key presses
     if cv.waitKey(1) == ord('q'):

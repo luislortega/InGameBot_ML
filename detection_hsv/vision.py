@@ -28,6 +28,7 @@ class Vision:
         self.method = method
 
     def find(self, haystack_img, threshold=0.5, max_results=10):
+        print("finding...")
         # run the OpenCV algorithm
         result = cv.matchTemplate(haystack_img, self.needle_img, self.method)
 
@@ -35,6 +36,7 @@ class Vision:
         locations = np.where(result >= threshold)
         locations = list(zip(*locations[::-1]))
         #print(locations)
+        print(locations)
 
         # if we found no results, return now. this reshape of the empty array allows us to 
         # concatenate together results without causing an error
@@ -63,6 +65,9 @@ class Vision:
         if len(rectangles) > max_results:
             print('Warning: too many results, raise the threshold.')
             rectangles = rectangles[:max_results]
+            
+        print(rectangles)
+        
 
         return rectangles
 
@@ -78,6 +83,7 @@ class Vision:
             center_y = y + int(h/2)
             # Save the points
             points.append((center_x, center_y))
+            
 
         return points
 
