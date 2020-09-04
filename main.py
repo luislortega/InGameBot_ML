@@ -61,6 +61,14 @@ if len(rectangles):
 
         #draw the rectangle
         cv.rectangle(haystack_img, top_left, bottom_right, color=(0,255,0), thickness=2, lineType=cv.LINE_4)
+        
+        '''
+        Drawing a mark
+        '''
+        
+        center_x = x + int(w/2)
+        center_y = y + int(h/2)
+        cv.drawMarker(haystack_img, (center_x, center_y), color=(255,0,255), line_type=cv.MARKER_CROSS)
 
     #show the result
     cv.imshow('Result', haystack_img)
