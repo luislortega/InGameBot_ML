@@ -8,6 +8,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 while(True):
     screenshot = pyautogui.screenshot()
     screenshot = np.array(screenshot)
+    screenshot = screenshot[:,:,::-1].copy()
     
     cv.imshow('Computer Vision', screenshot)
     
