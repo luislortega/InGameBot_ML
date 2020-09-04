@@ -7,43 +7,19 @@ haystack_img = cv.imread('albion_farm.jpg', cv.IMREAD_REDUCED_COLOR_2)
 needle_img = cv.imread('cabbage.jpg', cv.IMREAD_REDUCED_COLOR_2)
 
 result = cv.matchTemplate(haystack_img, needle_img, cv.TM_CCOEFF_NORMED)
+#multidimentional array with the data 
 
-#get the best match position
-min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-
-#this give the cordinates of the best match in the image
-print('Best match top left position: %s' % str(max_loc))
-#confidence of the match
-print('Best match confidence: %s' % max_val)
-
-#Object found?
-threshold = 0.8
-
-if max_val > threshold:
-    print('Found')
-    
-    #get dimension of the needle image
-    needle_w = needle_img.shape[1]
-    needle_h = needle_img.shape[0]
-    
-    # 
-    #  (top_left)
-    #       *-------------------*
-    #       |                   |
-    #       |                   |
-    #       |                   |
-    #       |                   |
-    #       |                   |
-    #       *-------------------*
-    #                           (bottom_right)
-    top_left = max_loc
-    bottom_right = (top_left[0] + needle_w, top_left[1] + needle_h)
-    
-    #draw the rectangle
-    cv.rectangle(haystack_img, top_left, bottom_right, color=(0,255,0), thickness=2, lineType=cv.LINE_4)
-    
-    #show the result
-    cv.imshow('Result', haystack_img)
-    cv.waitKey()
-else:
-    print('Not found')
+#[[-0.03693614 -0.01733347  0.00187275 ... -0.10432676 -0.09961629
+#  -0.07827686]
+# [-0.07594264 -0.06410409 -0.03129069 ... -0.10211685 -0.09682433
+#  -0.08718099]
+# [-0.08998041 -0.09126714 -0.05543974 ... -0.10111544 -0.10546029
+#  -0.10265154]
+# ...
+# [ 0.17939964  0.17995472  0.20211    ...  0.18741025  0.20025873
+#   0.20985427]
+# [ 0.15480845  0.16250251  0.1960496  ...  0.16597497  0.17956161
+#   0.18149436]
+# [ 0.14085224  0.1510219   0.17097141 ...  0.16942734  0.17414725
+#   0.17431433]]
+print(result)
