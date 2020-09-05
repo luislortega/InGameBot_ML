@@ -1,6 +1,5 @@
 import os
 
-
 # reads all the files in the /negative folder and generates neg.txt from them.
 # we'll run it manually like this:
 # $ python
@@ -9,12 +8,12 @@ import os
 # >>> from cascadeutils import generate_negative_description_file
 # >>> generate_negative_description_file()
 # >>> exit()
-def generate_negative_description_file():
+def generate_negatives():
     # open the output file for writing. will overwrite all existing data in there
     with open('neg.txt', 'w') as f:
         # loop over all the filenames
         for filename in os.listdir('negative'):
-            f.write('negative/' + filename + ' ')
+            f.write('negative/' + filename + '\n')
             #f.write('negative/' + filename + '/n')
 
 # the opencv_annotation executable can be found in opencv/build/x64/vc15/bin
@@ -31,7 +30,7 @@ def generate_negative_description_file():
 # generate positive samples from the annotations to get a vector file using:
 # $ C:/Users/luis_/OneDrive/Escritorio/OpenCV/build/x64/vc15/bin/opencv_createsamples.exe -info pos.txt -w 24 -h 24 -num 1000 -vec pos.vec
 
-# train the cascade classifier model using:
+# train the cascade classifier model using: (El doble de positivos y el numero de negativos)
 # $ C:/Users/luis_/OneDrive/Escritorio/OpenCV/build/x64/vc15/bin/opencv_traincascade.exe -data cascade/ -vec pos.vec -bg neg.txt -numPos 200 -numNeg 100 -numStages 10 -w 24 -h 24
 
 # my final classifier training arguments:
